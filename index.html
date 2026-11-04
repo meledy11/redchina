@@ -3,149 +3,167 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Интерактивная карточка HSK 1</title>
+    <title>HSK 1 - Интерактивный урок</title>
     <style>
+        /* Сброс стилей и базовый фон */
         body {
-            font-family: sans-serif;
-            background-color: #f0f0f0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f9;
             display: flex;
             justify-content: center;
             padding: 20px;
             margin: 0;
+            min-height: 100vh;
         }
 
+        /* Контейнер, который держит картинку и кнопки вместе */
         .image-container {
             position: relative;
             display: inline-block;
-            max-width: 800px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            max-width: 900px; /* Максимальная ширина на ПК */
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
             border-radius: 15px;
             overflow: hidden;
+            background-color: white;
         }
 
+        /* Сама картинка */
         .image-container img {
             display: block;
             width: 100%;
             height: auto;
-            pointer-events: none;
+            pointer-events: none; /* Клики проходят сквозь картинку к кнопкам */
         }
 
+        /* Невидимые области для клика */
         .hotspot {
             position: absolute;
             cursor: pointer;
-            border-radius: 10px;
+            border-radius: 8px;
             transition: all 0.2s ease;
+            /* z-index: 10; */
             
             /* ⬇️⬇️⬇️ РАСКОММЕНТИРУЙТЕ ЭТУ СТРОКУ, ЧТОБЫ НАСТРОИТЬ КООРДИНАТЫ ⬇️⬇️⬇️ */
-            /* background-color: rgba(255, 0, 0, 0.4); */
-            /* ⬆️⬆️⬆️ НЕ ЗАБУДЬТЕ ЗАКОММЕНТИРОВАТЬ ОБРАТНО, КОГДА НАСТРОИТЕ ⬆️⬆️⬆️ */
+            /* background-color: rgba(255, 0, 0, 0.3); */
+            /* ⬆️⬆️⬆️ НЕ ЗАБУДЬТЕ ЗАКОММЕНТИРОВАТЬ ОБРАТНО ⬆️⬆️⬆️ */
         }
 
+        /* Эффект при наведении мыши */
         .hotspot:hover {
             background-color: rgba(255, 255, 255, 0.4);
-            border: 2px dashed #fff;
-            box-shadow: 0 0 15px rgba(255,255,255,0.8);
+            border: 2px dashed #4CAF50;
+            box-shadow: 0 0 15px rgba(76, 175, 80, 0.5);
         }
 
+        /* Эффект при клике (выделение) */
         .hotspot.active {
-            background-color: rgba(255, 215, 0, 0.4);
+            background-color: rgba(255, 215, 0, 0.4); /* Золотистый */
             border: 3px solid #ffd700;
             box-shadow: 0 0 20px #ffd700;
         }
 
+        /* Подсказка на экране */
         .hint {
             position: fixed;
-            top: 10px;
-            right: 10px;
+            top: 15px;
+            right: 15px;
             background: rgba(0,0,0,0.8);
             color: white;
-            padding: 10px;
+            padding: 12px 20px;
             border-radius: 8px;
-            font-size: 12px;
+            font-size: 14px;
             z-index: 100;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            pointer-events: none; /* Чтобы не мешала кликам */
+        }
+
+        /* Адаптив для телефонов */
+        @media (max-width: 600px) {
+            body { padding: 10px; }
+            .hint { font-size: 11px; padding: 8px; top: 5px; right: 5px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="hint">💡 Кликайте по словам, чтобы услышать. <br>Чтобы настроить рамки, раскомментируйте красный фон в CSS.</div>
+    <div class="hint">💡 Кликайте по картинке, чтобы услышать слово.</div>
 
     <div class="image-container">
-        <!-- ВАША КАРТИНКА -->
-        <img src="hsk1.jpg" alt="HSK 1">
+        <!-- ВАША КАРТИНКА. Убедитесь, что файл называется hsk1.jpeg -->
+        <img src="hsk1.jpeg" alt="HSK 1 Словарь">
 
         <!-- ================= СЛОВАРЬ (15 СЛОВ) ================= -->
+        <!-- Координаты подобраны примерно под стандартную сетку. 
+             Если картинка обрезана, раскомментируйте красный фон в CSS, чтобы поправить. -->
         
-        <!-- 1. 天气 -->
-        <div class="hotspot" style="top: 27%; left: 5%; width: 17%; height: 12%;" data-text="天气" data-lang="zh-CN"></div>
-        <!-- 2. 热 -->
-        <div class="hotspot" style="top: 27%; left: 24%; width: 17%; height: 12%;" data-text="热" data-lang="zh-CN"></div>
-        <!-- 3. 冷 -->
-        <div class="hotspot" style="top: 27%; left: 43%; width: 17%; height: 12%;" data-text="冷" data-lang="zh-CN"></div>
-        <!-- 4. 下雨 -->
-        <div class="hotspot" style="top: 27%; left: 62%; width: 17%; height: 12%;" data-text="下雨" data-lang="zh-CN"></div>
-        <!-- 5. 山 -->
-        <div class="hotspot" style="top: 27%; left: 81%; width: 17%; height: 12%;" data-text="山" data-lang="zh-CN"></div>
+        <!-- Ряд 1 -->
+        <div class="hotspot" style="top: 27.5%; left: 5.5%; width: 16.5%; height: 12%;" data-text="天气" data-lang="zh-CN"></div>
+        <div class="hotspot" style="top: 27.5%; left: 24.5%; width: 16.5%; height: 12%;" data-text="热" data-lang="zh-CN"></div>
+        <div class="hotspot" style="top: 27.5%; left: 43.5%; width: 16.5%; height: 12%;" data-text="冷" data-lang="zh-CN"></div>
+        <div class="hotspot" style="top: 27.5%; left: 62.5%; width: 16.5%; height: 12%;" data-text="下雨" data-lang="zh-CN"></div>
+        <div class="hotspot" style="top: 27.5%; left: 81.5%; width: 16.5%; height: 12%;" data-text="山" data-lang="zh-CN"></div>
 
-        <!-- 6. 火 -->
-        <div class="hotspot" style="top: 43%; left: 5%; width: 17%; height: 12%;" data-text="火" data-lang="zh-CN"></div>
-        <!-- 7. 太阳 -->
-        <div class="hotspot" style="top: 43%; left: 24%; width: 17%; height: 12%;" data-text="太阳" data-lang="zh-CN"></div>
-        <!-- 8. 狗 -->
-        <div class="hotspot" style="top: 43%; left: 43%; width: 17%; height: 12%;" data-text="狗" data-lang="zh-CN"></div>
-        <!-- 9. 猫 -->
-        <div class="hotspot" style="top: 43%; left: 62%; width: 17%; height: 12%;" data-text="猫" data-lang="zh-CN"></div>
-        <!-- 10. 鸟 -->
-        <div class="hotspot" style="top: 43%; left: 81%; width: 17%; height: 12%;" data-text="鸟" data-lang="zh-CN"></div>
+        <!-- Ряд 2 -->
+        <div class="hotspot" style="top: 43.5%; left: 5.5%; width: 16.5%; height: 12%;" data-text="火" data-lang="zh-CN"></div>
+        <div class="hotspot" style="top: 43.5%; left: 24.5%; width: 16.5%; height: 12%;" data-text="太阳" data-lang="zh-CN"></div>
+        <div class="hotspot" style="top: 43.5%; left: 43.5%; width: 16.5%; height: 12%;" data-text="狗" data-lang="zh-CN"></div>
+        <div class="hotspot" style="top: 43.5%; left: 62.5%; width: 16.5%; height: 12%;" data-text="猫" data-lang="zh-CN"></div>
+        <div class="hotspot" style="top: 43.5%; left: 81.5%; width: 16.5%; height: 12%;" data-text="鸟" data-lang="zh-CN"></div>
 
-        <!-- 11. 鱼 -->
-        <div class="hotspot" style="top: 59%; left: 5%; width: 17%; height: 12%;" data-text="鱼" data-lang="zh-CN"></div>
-        <!-- 12. 水果 -->
-        <div class="hotspot" style="top: 59%; left: 24%; width: 17%; height: 12%;" data-text="水果" data-lang="zh-CN"></div>
-        <!-- 13. 米饭 -->
-        <div class="hotspot" style="top: 59%; left: 43%; width: 17%; height: 12%;" data-text="米饭" data-lang="zh-CN"></div>
-        <!-- 14. 菜 -->
-        <div class="hotspot" style="top: 59%; left: 62%; width: 17%; height: 12%;" data-text="菜" data-lang="zh-CN"></div>
-        <!-- 15. 水 -->
-        <div class="hotspot" style="top: 59%; left: 81%; width: 17%; height: 12%;" data-text="水" data-lang="zh-CN"></div>
+        <!-- Ряд 3 -->
+        <div class="hotspot" style="top: 59.5%; left: 5.5%; width: 16.5%; height: 12%;" data-text="鱼" data-lang="zh-CN"></div>
+        <div class="hotspot" style="top: 59.5%; left: 24.5%; width: 16.5%; height: 12%;" data-text="水果" data-lang="zh-CN"></div>
+        <div class="hotspot" style="top: 59.5%; left: 43.5%; width: 16.5%; height: 12%;" data-text="米饭" data-lang="zh-CN"></div>
+        <div class="hotspot" style="top: 59.5%; left: 62.5%; width: 16.5%; height: 12%;" data-text="菜" data-lang="zh-CN"></div>
+        <div class="hotspot" style="top: 59.5%; left: 81.5%; width: 16.5%; height: 12%;" data-text="水" data-lang="zh-CN"></div>
 
-        <!-- ================= ПРЕДЛОЖЕНИЯ (Внизу слева) ================= -->
+        <!-- ================= ПРЕДЛОЖЕНИЯ ================= -->
         
         <!-- 今天天气很好 -->
-        <div class="hotspot" style="top: 78%; left: 17%; width: 30%; height: 4%;" data-text="今天天气很好" data-lang="zh-CN"></div>
-        <!-- 我不喜欢冷 -->
-        <div class="hotspot" style="top: 87%; left: 17%; width: 30%; height: 4%;" data-text="我不喜欢冷" data-lang="zh-CN"></div>
-
-        <!-- ================= БЛОК ВАЖНО (Внизу справа) ================= -->
+        <div class="hotspot" style="top: 78%; left: 18%; width: 28%; height: 4.5%;" data-text="今天天气很好" data-lang="zh-CN"></div>
         
-        <!-- 一只狗 (Выделенное красным) -->
-        <div class="hotspot" style="top: 87%; left: 75%; width: 15%; height: 4%;" data-text="一只狗" data-lang="zh-CN"></div>
+        <!-- 我不喜欢冷 -->
+        <div class="hotspot" style="top: 86.5%; left: 18%; width: 28%; height: 4.5%;" data-text="我不喜欢冷" data-lang="zh-CN"></div>
+
+        <!-- ================= БЛОК ВАЖНО ================= -->
+        
+        <!-- 一只狗 (Выделено красным на картинке) -->
+        <div class="hotspot" style="top: 86.5%; left: 75%; width: 18%; height: 4.5%;" data-text="一只狗" data-lang="zh-CN"></div>
 
     </div>
 
     <script>
+        // 1. Функция озвучки
         function speak(text, lang) {
             if (!('speechSynthesis' in window)) {
-                alert("Ваш браузер не поддерживает озвучку.");
+                alert("Ваш браузер не поддерживает озвучку текста.");
                 return;
             }
-            window.speechSynthesis.cancel(); // Останавливаем предыдущую
+            // Останавливаем текущую озвучку, если она есть
+            window.speechSynthesis.cancel();
+
             const utterance = new SpeechSynthesisUtterance(text);
             utterance.lang = lang;
-            utterance.rate = 0.85; // Замедляем для четкости
+            utterance.rate = 0.85; // Чуть медленнее для изучения
+
             window.speechSynthesis.speak(utterance);
         }
 
+        // 2. Логика кликов
         const hotspots = document.querySelectorAll('.hotspot');
 
         hotspots.forEach(spot => {
-            spot.addEventListener('click', function(e) {
+            spot.addEventListener('click', function() {
                 const textToSpeak = this.getAttribute('data-text');
                 const lang = this.getAttribute('data-lang');
                 
+                // Озвучиваем
                 speak(textToSpeak, lang);
 
+                // Убираем выделение со всех остальных
                 hotspots.forEach(s => s.classList.remove('active'));
+                // Добавляем выделение текущему
                 this.classList.add('active');
             });
         });
