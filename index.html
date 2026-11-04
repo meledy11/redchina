@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Интерактивная карточка HSK 1</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .image-container {
+            position: relative;
+            display: inline-block;
+            max-width: 800px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .image-container img {
+            display: block;
+            width: 100%;
+            height: auto;
+            pointer-events: none;
+        }
+
+        .hotspot {
+            position: absolute;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+            
+            /* ⬇️⬇️⬇️ РАСКОММЕНТИРУЙТЕ ЭТУ СТРОКУ, ЧТОБЫ НАСТРОИТЬ КООРДИНАТЫ ⬇️⬇️⬇️ */
+            /* background-color: rgba(255, 0, 0, 0.4); */
+            /* ⬆️⬆️⬆️ НЕ ЗАБУДЬТЕ ЗАКОММЕНТИРОВАТЬ ОБРАТНО, КОГДА НАСТРОИТЕ ⬆️⬆️⬆️ */
+        }
+
+        .hotspot:hover {
+            background-color: rgba(255, 255, 255, 0.4);
+            border: 2px dashed #fff;
+            box-shadow: 0 0 15px rgba(255,255,255,0.8);
+        }
+
+        .hotspot.active {
+            background-color: rgba(255, 215, 0, 0.4);
+            border: 3px solid #ffd700;
+            box-shadow: 0 0 20px #ffd700;
+        }
+
+        .hint {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 12px;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hint">💡 Кликайте по словам, чтобы услышать. <br>Чтобы настроить рамки, раскомментируйте красный фон в CSS.</div>
+
+    <div class="image-container">
+        <!-- ВАША КАРТИНКА -->
+        <img src="hsk1.jpg" alt="HSK 1">
+
+        <!-- ================= СЛОВАРЬ (15 СЛОВ) ================= -->
+        
+        <!-- 1. 天气 -->
+        <div class="hotspot" style="top: 27%; left: 5%; width: 17%; height: 12%;" data-text="天气" data-lang="zh-CN"></div>
+        <!-- 2. 热 -->
+        <div class="hotspot" style="top: 27%; left: 24%; width: 17%; height: 12%;" data-text="热" data-lang="zh-CN"></div>
+        <!-- 3. 冷 -->
+        <div class="hotspot" style="top: 27%; left: 43%; width: 17%; height: 12%;" data-text="冷" data-lang="zh-CN"></div>
+        <!-- 4. 下雨 -->
+        <div class="hotspot" style="top: 27%; left: 62%; width: 17%; height: 12%;" data-text="下雨" data-lang="zh-CN"></div>
+        <!-- 5. 山 -->
+        <div class="hotspot" style="top: 27%; left: 81%; width: 17%; height: 12%;" data-text="山" data-lang="zh-CN"></div>
+
+        <!-- 6. 火 -->
+        <div class="hotspot" style="top: 43%; left: 5%; width: 17%; height: 12%;" data-text="火" data-lang="zh-CN"></div>
+        <!-- 7. 太阳 -->
+        <div class="hotspot" style="top: 43%; left: 24%; width: 17%; height: 12%;" data-text="太阳" data-lang="zh-CN"></div>
+        <!-- 8. 狗 -->
+        <div class="hotspot" style="top: 43%; left: 43%; width: 17%; height: 12%;" data-text="狗" data-lang="zh-CN"></div>
+        <!-- 9. 猫 -->
+        <div class="hotspot" style="top: 43%; left: 62%; width: 17%; height: 12%;" data-text="猫" data-lang="zh-CN"></div>
+        <!-- 10. 鸟 -->
+        <div class="hotspot" style="top: 43%; left: 81%; width: 17%; height: 12%;" data-text="鸟" data-lang="zh-CN"></div>
+
+        <!-- 11. 鱼 -->
+        <div class="hotspot" style="top: 59%; left: 5%; width: 17%; height: 12%;" data-text="鱼" data-lang="zh-CN"></div>
+        <!-- 12. 水果 -->
+        <div class="hotspot" style="top: 59%; left: 24%; width: 17%; height: 12%;" data-text="水果" data-lang="zh-CN"></div>
+        <!-- 13. 米饭 -->
+        <div class="hotspot" style="top: 59%; left: 43%; width: 17%; height: 12%;" data-text="米饭" data-lang="zh-CN"></div>
+        <!-- 14. 菜 -->
+        <div class="hotspot" style="top: 59%; left: 62%; width: 17%; height: 12%;" data-text="菜" data-lang="zh-CN"></div>
+        <!-- 15. 水 -->
+        <div class="hotspot" style="top: 59%; left: 81%; width: 17%; height: 12%;" data-text="水" data-lang="zh-CN"></div>
+
+        <!-- ================= ПРЕДЛОЖЕНИЯ (Внизу слева) ================= -->
+        
+        <!-- 今天天气很好 -->
+        <div class="hotspot" style="top: 78%; left: 17%; width: 30%; height: 4%;" data-text="今天天气很好" data-lang="zh-CN"></div>
+        <!-- 我不喜欢冷 -->
+        <div class="hotspot" style="top: 87%; left: 17%; width: 30%; height: 4%;" data-text="我不喜欢冷" data-lang="zh-CN"></div>
+
+        <!-- ================= БЛОК ВАЖНО (Внизу справа) ================= -->
+        
+        <!-- 一只狗 (Выделенное красным) -->
+        <div class="hotspot" style="top: 87%; left: 75%; width: 15%; height: 4%;" data-text="一只狗" data-lang="zh-CN"></div>
+
+    </div>
+
+    <script>
+        function speak(text, lang) {
+            if (!('speechSynthesis' in window)) {
+                alert("Ваш браузер не поддерживает озвучку.");
+                return;
+            }
+            window.speechSynthesis.cancel(); // Останавливаем предыдущую
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            utterance.rate = 0.85; // Замедляем для четкости
+            window.speechSynthesis.speak(utterance);
+        }
+
+        const hotspots = document.querySelectorAll('.hotspot');
+
+        hotspots.forEach(spot => {
+            spot.addEventListener('click', function(e) {
+                const textToSpeak = this.getAttribute('data-text');
+                const lang = this.getAttribute('data-lang');
+                
+                speak(textToSpeak, lang);
+
+                hotspots.forEach(s => s.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
